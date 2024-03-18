@@ -1,0 +1,12 @@
+{
+	"name": "SHIR-shared-SQL",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourcegroups/rg-dev-salesus/providers/Microsoft.DataFactory/factories/adf-dev-saleseus/integrationruntimes/SHIR-SQL-DB-Work",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}
