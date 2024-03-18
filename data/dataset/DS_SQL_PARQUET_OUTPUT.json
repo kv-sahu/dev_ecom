@@ -1,16 +1,15 @@
 {
-	"name": "DS_REST_Parquet_OUTPUT",
+	"name": "DS_SQL_PARQUET_OUTPUT",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_REST_Parquet_OUTPUT",
+			"referenceName": "LS_SQL_PARQUET_OUTPUT",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "customer"
+				"type": "AzureBlobFSLocation"
 			},
 			"compressionCodec": "snappy"
 		},
