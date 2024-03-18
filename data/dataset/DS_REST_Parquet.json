@@ -1,0 +1,12 @@
+{
+	"name": "DS_REST_Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_REST_Parquet",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
