@@ -2,7 +2,7 @@
 	"name": "DS_SQL_PARQUET_OUTPUT",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_SQL_PARQUET_OUTPUT",
+			"referenceName": "DS_SQL_PARQ_OUTPUT",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
