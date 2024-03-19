@@ -1,0 +1,167 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfdevmarketecom"
+		},
+		"LS_REST_Parquet_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_REST_Parquet_OUTPUT'"
+		},
+		"LS_SQL_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SQL_PARQUET_OUTPUT'"
+		},
+		"LS_SQL_Parquet_INPUT_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQL_Parquet_INPUT'"
+		},
+		"LS_ORDERItem_SQL_INPUT_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ORDERItem_SQL_INPUT'"
+		},
+		"LS_ADLS_Parquet_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_Parquet'"
+		},
+		"LS_ADLS_Parquet_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_Parquet_OUTPUT'"
+		},
+		"LS_BLOB_Parquet_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOB_Parquet'"
+		},
+		"LS_BLOB_Parquet_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_BLOB_Parquet_OUTPUT'"
+		},
+		"LS_REST_Parquet_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/6KPRJ6/data"
+		},
+		"LS_REST_Parquet_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
+		},
+		"LS_SQL_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
+		},
+		"LS_ADLS_Parquet_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlssrcdevecom.dfs.core.windows.net/"
+		},
+		"LS_ADLS_Parquet_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
+		},
+		"LS_BLOB_Parquet_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
+		},
+		"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfdevmarketecom_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_REST_Parquet_OUTPUT_accountKey": {
+						"value": "[parameters('LS_REST_Parquet_OUTPUT_accountKey')]"
+					},
+					"LS_SQL_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS_SQL_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS_ADLS_Parquet_accountKey": {
+						"value": "[parameters('LS_ADLS_Parquet_accountKey')]"
+					},
+					"LS_ADLS_Parquet_OUTPUT_accountKey": {
+						"value": "[parameters('LS_ADLS_Parquet_OUTPUT_accountKey')]"
+					},
+					"LS_BLOB_Parquet_connectionString": {
+						"value": "[parameters('LS_BLOB_Parquet_connectionString')]"
+					},
+					"LS_BLOB_Parquet_OUTPUT_accountKey": {
+						"value": "[parameters('LS_BLOB_Parquet_OUTPUT_accountKey')]"
+					},
+					"LS_SQL_Parquet_INPUT_connectionString": {
+						"value": "[parameters('LS_SQL_Parquet_INPUT_connectionString')]"
+					},
+					"LS_ORDERItem_SQL_INPUT_connectionString": {
+						"value": "[parameters('LS_ORDERItem_SQL_INPUT_connectionString')]"
+					},
+					"LS_REST_Parquet_properties_typeProperties_url": {
+						"value": "[parameters('LS_REST_Parquet_properties_typeProperties_url')]"
+					},
+					"LS_REST_Parquet_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS_REST_Parquet_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS_SQL_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS_SQL_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS_ADLS_Parquet_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLS_Parquet_properties_typeProperties_url')]"
+					},
+					"LS_ADLS_Parquet_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLS_Parquet_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS_BLOB_Parquet_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS_BLOB_Parquet_OUTPUT_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfdevmarketecom_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
+						"value": "[parameters('EVNT_MANUALFILE_PARQ_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevmarketecom_ArmTemplate_0')]"
+			]
+		}
+	]
+}
