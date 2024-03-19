@@ -1,9 +1,9 @@
 {
-	"name": "PL_CSV_Parquet",
+	"name": "PL_ADLS_Parquet",
 	"properties": {
 		"activities": [
 			{
-				"name": "CP_CSV_Parquet",
+				"name": "CP_ADLS_Parquet",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -15,8 +15,48 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ADLS_Parquet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS_Parquet_OUTPUT",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
