@@ -39,6 +39,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_BLOB_Parquet_OUTPUT'"
 		},
+		"DS_SQL_PARQ_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'DS_SQL_PARQ_OUTPUT'"
+		},
 		"LS_REST_Parquet_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retoolapi.dev/6KPRJ6/data"
@@ -70,6 +74,10 @@
 		"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/blobsrcdevecom"
+		},
+		"DS_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -116,6 +124,9 @@
 					"LS_BLOB_Parquet_OUTPUT_accountKey": {
 						"value": "[parameters('LS_BLOB_Parquet_OUTPUT_accountKey')]"
 					},
+					"DS_SQL_PARQ_OUTPUT_accountKey": {
+						"value": "[parameters('DS_SQL_PARQ_OUTPUT_accountKey')]"
+					},
 					"LS_SQL_Parquet_INPUT_connectionString": {
 						"value": "[parameters('LS_SQL_Parquet_INPUT_connectionString')]"
 					},
@@ -139,6 +150,9 @@
 					},
 					"LS_BLOB_Parquet_OUTPUT_properties_typeProperties_url": {
 						"value": "[parameters('LS_BLOB_Parquet_OUTPUT_properties_typeProperties_url')]"
+					},
+					"DS_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('DS_SQL_PARQ_OUTPUT_properties_typeProperties_url')]"
 					}
 				}
 			},
