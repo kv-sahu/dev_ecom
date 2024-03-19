@@ -2,7 +2,7 @@
 	"name": "DS_SQL_Parquet_INPUT",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_SQL_Parquet_INPUT",
+			"referenceName": "LS_ORDERItem_SQL_INPUT",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -39,7 +39,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "orders"
+			"table": "order_items"
 		}
 	}
 }
