@@ -1,0 +1,16 @@
+{
+	"name": "LS_ORDERItem_SQL_INPUT",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=DESKTOP-25TJL3N\\MSSQL_KV;initial catalog=salesecom;user id=db_kv",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlM2Q5MWE1Mi1jMzc2LTQyYjgtOWMzOS1kNGI1YTc0NmRlZTQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SHIR-ecom",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
