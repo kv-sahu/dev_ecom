@@ -67,6 +67,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
 		},
+		"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/blobsrcdevecom"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -156,6 +160,9 @@
 					},
 					"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
 						"value": "[parameters('EVNT_MANUALFILE_PARQ_properties_typeProperties_scope')]"
+					},
+					"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
+						"value": "[parameters('EVNT_BLOB_PARQ_properties_typeProperties_scope')]"
 					}
 				}
 			},

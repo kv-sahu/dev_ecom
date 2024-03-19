@@ -50,6 +50,9 @@
 		"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
 			"value": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
 		},
+		"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
+			"value": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/blobsrcdevecom"
+		},
 		"containerUri": {
 			"value": ""
 		},
