@@ -5,12 +5,6 @@
 		"factoryName": {
 			"value": "adfdevmarketecom"
 		},
-		"LS_REST_Parquet_OUTPUT_accountKey": {
-			"value": ""
-		},
-		"LS_ORDERItem_SQL_INPUT_connectionString": {
-			"value": ""
-		},
 		"LS_ADLS_Parquet_accountKey": {
 			"value": ""
 		},
@@ -23,20 +17,20 @@
 		"LS_BLOB_Parquet_OUTPUT_accountKey": {
 			"value": ""
 		},
+		"LS_ORDERItem_SQL_INPUT_connectionString": {
+			"value": ""
+		},
+		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_accountKey": {
+			"value": ""
+		},
 		"LS_ORDER_SQL_PARQ_connectionString": {
 			"value": ""
 		},
 		"LS_ORDER_SQL_PARQ_OUTPUT_accountKey": {
 			"value": ""
 		},
-		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_accountKey": {
+		"LS_REST_Parquet_OUTPUT_accountKey": {
 			"value": ""
-		},
-		"LS_REST_Parquet_properties_typeProperties_url": {
-			"value": "https://retoolapi.dev/6KPRJ6/data"
-		},
-		"LS_REST_Parquet_OUTPUT_properties_typeProperties_url": {
-			"value": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
 		"LS_ADLS_Parquet_properties_typeProperties_url": {
 			"value": "https://adlssrcdevecom.dfs.core.windows.net/"
@@ -47,17 +41,23 @@
 		"LS_BLOB_Parquet_OUTPUT_properties_typeProperties_url": {
 			"value": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
-		"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
-			"value": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
-		},
-		"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
-			"value": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/blobsrcdevecom"
+		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
 		"LS_ORDER_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
 			"value": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
-		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
+		"LS_REST_Parquet_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/6KPRJ6/data"
+		},
+		"LS_REST_Parquet_OUTPUT_properties_typeProperties_url": {
 			"value": "https://adlsstagingdevecom.dfs.core.windows.net/"
+		},
+		"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
+			"value": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/blobsrcdevecom"
+		},
+		"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
+			"value": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
 		}
 	}
 }

@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevmarketecom"
 		},
-		"LS_REST_Parquet_OUTPUT_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_REST_Parquet_OUTPUT'"
-		},
 		"LS_ADLS_Parquet_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_Parquet'"
@@ -27,13 +23,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_BLOB_Parquet_OUTPUT'"
 		},
+		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ORDER_ITEM_SQL_PARQ_OUTPUT'"
+		},
 		"LS_ORDER_SQL_PARQ_OUTPUT_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ORDER_SQL_PARQ_OUTPUT'"
 		},
-		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_accountKey": {
+		"LS_REST_Parquet_OUTPUT_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_ORDER_ITEM_SQL_PARQ_OUTPUT'"
+			"metadata": "Secure string for 'accountKey' of 'LS_REST_Parquet_OUTPUT'"
 		},
 		"LS_ORDERItem_SQL_INPUT_connectionString": {
 			"type": "secureString",
@@ -42,14 +42,6 @@
 		"LS_ORDER_SQL_PARQ_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_ORDER_SQL_PARQ'"
-		},
-		"LS_REST_Parquet_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://retoolapi.dev/6KPRJ6/data"
-		},
-		"LS_REST_Parquet_OUTPUT_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
 		"LS_ADLS_Parquet_properties_typeProperties_url": {
 			"type": "string",
@@ -63,11 +55,19 @@
 			"type": "string",
 			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
+		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
+		},
 		"LS_ORDER_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		},
-		"LS_ORDER_ITEM_SQL_PARQ_OUTPUT_properties_typeProperties_url": {
+		"LS_REST_Parquet_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/6KPRJ6/data"
+		},
+		"LS_REST_Parquet_OUTPUT_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsstagingdevecom.dfs.core.windows.net/"
 		}
@@ -76,48 +76,6 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_REST_Parquet')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "RestService",
-				"typeProperties": {
-					"url": "[parameters('LS_REST_Parquet_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_REST_Parquet_OUTPUT')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_REST_Parquet_OUTPUT_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_REST_Parquet_OUTPUT_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SHIR-ecom')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_ADLS_Parquet')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -183,23 +141,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_ORDER_SQL_PARQ_OUTPUT')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_ORDER_SQL_PARQ_OUTPUT_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_ORDER_SQL_PARQ_OUTPUT_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/LS_ORDER_ITEM_SQL_PARQ_OUTPUT')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -217,65 +158,63 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_REST_Parquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_REST_Parquet",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_REST_Parquet')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_REST_Parquet_OUTPUT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_REST_Parquet_OUTPUT",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "output"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_REST_Parquet_OUTPUT')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_ORDERItem_SQL_INPUT')]",
+			"name": "[concat(parameters('factoryName'), '/LS_ORDER_SQL_PARQ_OUTPUT')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "SqlServer",
+				"type": "AzureBlobFS",
 				"typeProperties": {
-					"connectionString": "[parameters('LS_ORDERItem_SQL_INPUT_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "SHIR-ecom",
-					"type": "IntegrationRuntimeReference"
+					"url": "[parameters('LS_ORDER_SQL_PARQ_OUTPUT_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_ORDER_SQL_PARQ_OUTPUT_accountKey')]"
+					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SHIR-ecom')]"
-			]
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_REST_Parquet')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('LS_REST_Parquet_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_REST_Parquet_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_REST_Parquet_OUTPUT_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_REST_Parquet_OUTPUT_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SHIR-ecom')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_ADLS_Parquet')]",
@@ -428,22 +367,37 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_ORDER_SQL_PARQ')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/DS_ORDER_ITEM_SQL_PARQ_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('LS_ORDER_SQL_PARQ_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "LS_ORDER_ITEM_SQL_PARQ_OUTPUT",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "SHIR-ecom",
-					"type": "IntegrationRuntimeReference"
-				}
+				"parameters": {
+					"FileName_OrderITEM": {
+						"type": "string",
+						"defaultValue": "orderitem.parquet"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName_OrderITEM",
+							"type": "Expression"
+						},
+						"fileSystem": "output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SHIR-ecom')]"
+				"[concat(variables('factoryId'), '/linkedServices/LS_ORDER_ITEM_SQL_PARQ_OUTPUT')]"
 			]
 		},
 		{
@@ -458,7 +412,7 @@
 				"parameters": {
 					"FileName": {
 						"type": "string",
-						"defaultValue": "order"
+						"defaultValue": "order.parquet"
 					}
 				},
 				"annotations": [],
@@ -481,12 +435,30 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_ORDER_ITEM_SQL_PARQ_OUTPUT')]",
+			"name": "[concat(parameters('factoryName'), '/DS_REST_Parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "LS_ORDER_ITEM_SQL_PARQ_OUTPUT",
+					"referenceName": "LS_REST_Parquet",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_REST_Parquet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_REST_Parquet_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_REST_Parquet_OUTPUT",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -501,17 +473,55 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_ORDER_ITEM_SQL_PARQ_OUTPUT')]"
+				"[concat(variables('factoryId'), '/linkedServices/LS_REST_Parquet_OUTPUT')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_BLOB_Parquet')]",
+			"name": "[concat(parameters('factoryName'), '/LS_ORDERItem_SQL_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ORDERItem_SQL_INPUT_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "SHIR-ecom",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SHIR-ecom')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ORDER_SQL_PARQ')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ORDER_SQL_PARQ_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "SHIR-ecom",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SHIR-ecom')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_ADLS_Parquet')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "CP_BlobFile_Parquet",
+						"name": "CP_ADLS_Parquet",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -526,8 +536,9 @@
 							"source": {
 								"type": "DelimitedTextSource",
 								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
+									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
+									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -555,14 +566,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DS_BLOB_Parquet",
+								"referenceName": "DS_ADLS_Parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DS_BLOB_Parquet_OUTPUT",
+								"referenceName": "DS_ADLS_Parquet_OUTPUT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -575,8 +586,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_BLOB_Parquet')]",
-				"[concat(variables('factoryId'), '/datasets/DS_BLOB_Parquet_OUTPUT')]"
+				"[concat(variables('factoryId'), '/datasets/DS_ADLS_Parquet')]",
+				"[concat(variables('factoryId'), '/datasets/DS_ADLS_Parquet_OUTPUT')]"
 			]
 		}
 	]

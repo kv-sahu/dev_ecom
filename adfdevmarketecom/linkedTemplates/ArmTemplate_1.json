@@ -7,13 +7,13 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevmarketecom"
 		},
-		"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
-		},
 		"EVNT_BLOB_PARQ_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/blobsrcdevecom"
+		},
+		"EVNT_MANUALFILE_PARQ_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/021c8cbc-c299-44eb-b13f-2ee04a5c045e/resourceGroups/rg_dev_ecom/providers/Microsoft.Storage/storageAccounts/adlssrcdevecom"
 		}
 	},
 	"variables": {
@@ -21,13 +21,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_ADLS_Parquet')]",
+			"name": "[concat(parameters('factoryName'), '/PL_BLOB_Parquet')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "CP_ADLS_Parquet",
+						"name": "CP_BlobFile_Parquet",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -42,9 +42,8 @@
 							"source": {
 								"type": "DelimitedTextSource",
 								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
+									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -72,14 +71,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DS_ADLS_Parquet",
+								"referenceName": "DS_BLOB_Parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DS_ADLS_Parquet_OUTPUT",
+								"referenceName": "DS_BLOB_Parquet_OUTPUT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -156,25 +155,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_ORDER_SQL_PARQ')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_ORDER_SQL_PARQ",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "orders"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/DS_ORDER_ITEM_SQL_PARQ')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -219,90 +199,20 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SCH_REST_PARQ')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/DS_ORDER_SQL_PARQ')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ORDER_SQL_PARQ",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_REST_Parquet",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
+				"type": "SqlServerTable",
+				"schema": [],
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2024-03-19T23:00:00",
-						"timeZone": "Singapore Standard Time",
-						"schedule": {}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_REST_Parquet')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EVNT_MANUALFILE_PARQ')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_ADLS_Parquet",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/input/blobs/payments/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('EVNT_MANUALFILE_PARQ_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_ADLS_Parquet')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EVNT_BLOB_PARQ')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_BLOB_Parquet",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/input/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('EVNT_BLOB_PARQ_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
+					"schema": "dbo",
+					"table": "orders"
 				}
 			},
 			"dependsOn": []
@@ -429,6 +339,94 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EVNT_BLOB_PARQ')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_BLOB_Parquet",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/input/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EVNT_BLOB_PARQ_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_BLOB_Parquet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EVNT_MANUALFILE_PARQ')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_ADLS_Parquet",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/input/blobs/payments/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EVNT_MANUALFILE_PARQ_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SCH_REST_PARQ')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_REST_Parquet",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2024-03-19T23:00:00",
+						"timeZone": "Singapore Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_REST_Parquet')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SCH_SQL_PARQ')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -450,8 +448,7 @@
 						"frequency": "Day",
 						"interval": 1,
 						"startTime": "2024-03-19T22:00:00",
-						"timeZone": "Singapore Standard Time",
-						"schedule": {}
+						"timeZone": "Singapore Standard Time"
 					}
 				}
 			},
