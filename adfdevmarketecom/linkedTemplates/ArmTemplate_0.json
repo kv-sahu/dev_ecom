@@ -466,6 +466,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "customer.parquet",
 						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
