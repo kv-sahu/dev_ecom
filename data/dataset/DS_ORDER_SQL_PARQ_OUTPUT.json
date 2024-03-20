@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "order.parquet",
 				"fileSystem": "output"
 			},
 			"compressionCodec": "snappy"
