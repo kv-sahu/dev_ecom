@@ -1,0 +1,16 @@
+{
+	"name": "DS_ORDER_SQL_PARQ",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ORDER_SQL_PARQ",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "orders"
+		}
+	}
+}

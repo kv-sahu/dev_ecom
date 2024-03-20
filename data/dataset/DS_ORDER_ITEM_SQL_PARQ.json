@@ -1,0 +1,41 @@
+{
+	"name": "DS_ORDER_ITEM_SQL_PARQ",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DS_ORDER_ITEM_SQL_PARQ",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "varchar"
+			},
+			{
+				"name": "order_item_id",
+				"type": "varchar"
+			},
+			{
+				"name": "product_id",
+				"type": "varchar"
+			},
+			{
+				"name": "seller_id",
+				"type": "varchar"
+			},
+			{
+				"name": "price",
+				"type": "varchar"
+			},
+			{
+				"name": "shipping_charges",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "order_items"
+		}
+	}
+}
