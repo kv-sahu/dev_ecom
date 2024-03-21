@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"folderPath": "payments",
 				"fileSystem": "output"
 			},
 			"compressionCodec": "snappy"

@@ -48,7 +48,10 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ORDER_ITEM_SQL_PARQ_OUTPUT",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName_OrderITEM": "orderitem.parquet"
+						}
 					}
 				]
 			},
@@ -98,7 +101,10 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ORDER_SQL_PARQ_OUTPUT",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": "order.parquet"
+						}
 					}
 				]
 			}

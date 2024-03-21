@@ -20,6 +20,7 @@
 					"value": "@dataset().FileName_OrderITEM",
 					"type": "Expression"
 				},
+				"folderPath": "orderitem",
 				"fileSystem": "output"
 			},
 			"compressionCodec": "snappy"
