@@ -354,7 +354,9 @@
 							{
 								"referenceName": "DS_ORDER_ITEM_SQL_PARQ_OUTPUT",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"FileName_OrderITEM": "orderitem.parquet"
+								}
 							}
 						]
 					},
@@ -406,7 +408,9 @@
 							{
 								"referenceName": "DS_ORDER_SQL_PARQ_OUTPUT",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"FileName": "order.parquet"
+								}
 							}
 						]
 					}
@@ -486,6 +490,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"folderPath": "payments",
 						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
@@ -563,6 +568,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"folderPath": "products",
 						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
@@ -643,6 +649,7 @@
 							"value": "@dataset().FileName_OrderITEM",
 							"type": "Expression"
 						},
+						"folderPath": "orderitem",
 						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
@@ -698,6 +705,7 @@
 							"value": "@dataset().FileName",
 							"type": "Expression"
 						},
+						"folderPath": "order",
 						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
@@ -741,6 +749,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": "customer.parquet",
+						"folderPath": "customer",
 						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"

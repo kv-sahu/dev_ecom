@@ -271,7 +271,9 @@
 							{
 								"referenceName": "DS_ORDER_ITEM_SQL_PARQ_OUTPUT",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"FileName_OrderITEM": "orderitem.parquet"
+								}
 							}
 						]
 					},
@@ -323,7 +325,9 @@
 							{
 								"referenceName": "DS_ORDER_SQL_PARQ_OUTPUT",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"FileName": "order.parquet"
+								}
 							}
 						]
 					}
